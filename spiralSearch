@@ -1,0 +1,43 @@
+/* In Mobility.cpp
+  goalLocation = searchController.searcha(currentLocation);
+
+*/
+
+  // In SearchController.Cpp
+  float aa= 1.0;
+  double ya= 1.0;
+  geometry_msgs::Pose2D SearchController::searcha(geometry_msgs::Pose2D currentLocation) {
+  geometry_msgs::Pose2D goalLocation;
+ if( aa <5){
+   //Set the maximum radius of the search pattern
+
+        if(ya <= 2*M_PI){
+
+            goalLocation.x =  aa* cos(ya);
+            goalLocation.y =  aa* sin(ya);
+            goalLocation.theta = atan2(goalLocation.y - currentLocation.y, goalLocation.x - currentLocation.x);
+
+            ya = ya + M_PI_4;          //Set the degree you want to increase. In other words points per radious
+            return goalLocation;
+            }
+
+        else if (ya > 2*M_PI){
+        ya = M_PI_4;
+        aa = aa+0.5;               //Increase Radious
+            goalLocation.x =  aa* cos(ya);
+            goalLocation.y =  aa* sin(ya);
+            goalLocation.theta = atan2(goalLocation.y - currentLocation.y, goalLocation.x - currentLocation.x);
+            ya = ya + M_PI_4;      //Set the degree you want to increase. In other words points per radious
+            return goalLocation;
+                    }            }
+ else if(aa >= 5){
+            aa = 2;
+            goalLocation.x =  aa* cos(ya);
+            goalLocation.y =  aa* sin(ya);
+            goalLocation.theta = atan2(goalLocation.y - currentLocation.y, goalLocation.x - currentLocation.x);
+
+            ya = ya + M_PI_4;     //Set the degree you want to increase. In other words points per radious
+            return goalLocation;
+}
+  }
+  
